@@ -28,12 +28,15 @@ object Colls1 {
 
       */
 
-    java.util.TimeZone.getAvailableIDs.foreach(x=>println(s" "+x))
+//    java.util.TimeZone.getAvailableIDs.foreach(x=>println(s" "+x))
 
 //    val entries = java.util.TimeZone.getAvailableIDs.filter(_.lastIndexOf('/') > -1).
 //      groupBy(x=>x.substring(0,x.indexOf('/'))) map {case (x:String,y:Array[String])=>(x,y.length)}
 //    println(entries.toSeq.sortWith(_._2 > _._2))
     //.keys.foreach(x=>println(s" "+x))
+//    println(swap((1,2)))
+    println(calcLeavesSum2(List(List(1,List(5)),List(2),List(3,4))))
+
   }
 
   def intersectCollections[A,B](coll:Seq[A], m:Map[A,B]):Seq[B]={
@@ -42,4 +45,29 @@ object Colls1 {
       case _=> None
     })).filter(_.isDefined).map(_.get)
   }
+
+  def swap[A](a:Tuple2[A,A]):Tuple2[A,A]={
+    (a._2,a._1)
+  }
+  def swapOtp[A](a:Tuple2[Option[A],Option[A]]):Option[Tuple2[A,A]]={
+    a match {
+      case (Some(x),Some(y)) => Some(y,x)
+      case _ => None
+    }
+  }
+
+  def calcLeavesSum(lst:List[Any]):Int={
+    lst match {
+      case lstOfInts if lstOfInts.forall(x=>x.isInstanceOf[Int])  => lstOfInts.asInstanceOf[List[Int]].sum
+      case lstOfMixed =>   lstOfMixed.filter(_.isInstanceOf[Int]).asInstanceOf[List[Int]].sum +
+        lstOfMixed.filterNot(_.isInstanceOf[Int]).asInstanceOf[List[List[Any]]].map(calcLeavesSum).sum
+    }
+  }
+
+  def calcLeavesSum2(lst:List[Any]):Int={
+      lst.filter(_.isInstanceOf[Int]).asInstanceOf[List[Int]].sum +
+      lst.filterNot(_.isInstanceOf[Int]).asInstanceOf[List[List[Any]]].map(calcLeavesSum2).sum
+  }
+
+
 }
