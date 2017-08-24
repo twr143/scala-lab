@@ -4,7 +4,7 @@ object Composition {
 
   }
   def compose[A](f: A=>Option[A],g: A=>Option[A], x:A):Option[A]={
-    if (f(x).isEmpty || g(f(x)).isEmpty) None else g(f(x))
+    if (f(x).isEmpty || g(f(x).get).isEmpty) None else g(f(x).get)
   }
   def f(x:Double):Option[Double]={
     x match{

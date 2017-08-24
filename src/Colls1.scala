@@ -35,6 +35,8 @@ object Colls1 {
 //    println(entries.toSeq.sortWith(_._2 > _._2))
     //.keys.foreach(x=>println(s" "+x))
 //    println(swap((1,2)))
+    val lst = List(1,2,3)
+    println(s"head ${lst.head} ,second ${lst.tail.head}, tail ${lst.tail}")
     println(calcLeavesSum2(List(List(1,List(5)),List(2),List(3,4))))
 
   }
