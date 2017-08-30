@@ -14,6 +14,7 @@ object Types {
   class Pair2[+T](val first: T, val second: T){
 
   }
+  def check[A](error: String, value: A)(f: A => Boolean)(g: A => Boolean) = if (f(value)&&g(value)) Seq.empty[String] else Seq(error)
   def main(args: Array[String]): Unit = {
     println(makePair(1,2))
   }

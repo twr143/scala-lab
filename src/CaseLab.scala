@@ -16,16 +16,27 @@ object CaseLab {
       case SMS(caller , message) =>
         "you've got an SMS from "+caller+" with message "+message
       case v@VoiceRecording(_,_) => v.toString
-      case a@any=> s"[Notif. not implemented] $a"
+      case a@any=>""
+//      case a@any=> s"[Notif. not implemented] $a"
+    }
+  }
+
+  def showNotificationU(n:Notification):Unit={
+    n match {
+      case Email(sender, title, body) =>
+        if (sender == "Me") println("you've got email from "+sender +" called "+title)
+      case a@any=>
+      //      case a@any=> s"[Notif. not implemented] $a"
     }
   }
   def main(args: Array[String]): Unit = {
     val someVoiceRecording = VoiceRecording("Ilya", "voicerecording.org/id/123")
     val someEmail = Email("Me","title" ,"voicerecording.org/id/123")
+    val otherEmail = Email("Other","title" ,"voicerecording.org/id/123")
     val telegramMessage = TelegramMessage("Me","some mock message" )
 //    println(showNotification(someVoiceRecording))
-    println(showNotification(someEmail))
-    println(showNotification(someVoiceRecording))
-    println(showNotification(telegramMessage))
+    showNotificationU(someEmail)
+    showNotificationU(someVoiceRecording)
+    showNotificationU(telegramMessage)
   }
 }
