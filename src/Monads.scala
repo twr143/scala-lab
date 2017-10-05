@@ -1,3 +1,4 @@
+import scala.concurrent.Future
 import scala.util.Try
 
 object Monads {
@@ -7,6 +8,15 @@ object Monads {
 //    println(f(Some(3)))
 //    println(f(None))
       forCompr
+
+      val a =Some("a")
+      a match {
+          case Some(b@"a") => println(s"b=$b")
+          case _⇒println(s"some other value")
+      }
+
+//      var m =  Map[String,Boolean]
+//      m+=("1"->Future(true))
   }
 
   def forCompr:Option[Int]={
@@ -25,4 +35,5 @@ object Monads {
       case other⇒ 6
     }
   }
+
 }
