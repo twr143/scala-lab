@@ -18,7 +18,7 @@ object App1 {
 
     fivetimes onComplete     {
       case Success(s) => println(s"5 times= $s")
-      case _ => println(s"not expected"+_)
+      case any => println(s"not expected"+any.toString)
     }
 
 
