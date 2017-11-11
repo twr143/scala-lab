@@ -3,7 +3,8 @@
   */
 object Fold {
   def main(args: Array[String]): Unit = {
-    goodOrBad(Some(5)).fold(
+    val incoming = if (args.length > 0) Some(args(0).toString.toInt) else None
+    goodOrBad(incoming).fold(
       b => println(s" bad: ${b.code}"),
       g => println(s" good: ${g.code}")
     )
