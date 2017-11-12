@@ -10,13 +10,13 @@ object Fold {
     )
   }
 
-  def goodOrBad(param: Option[Int]): Either[Bad, Good] = {
-    if (param.exists(_ > 0)) Right(Good(param.get)) else Left(Bad(param.getOrElse(0)))
+  def goodOrBad(param: Option[Int]): Either[Bad1, Good1] = {
+    if (param.exists(_ > 0)) Right(Good1(param.get)) else Left(Bad1(param.getOrElse(0)))
   }
 }
 sealed trait Result {
   def code: Int
 }
-case class Good(code: Int) extends Result
-case class Bad(code: Int) extends Result
+sealed case class Good(code: Int) extends Result
+sealed case class Bad(code: Int) extends Result
 
