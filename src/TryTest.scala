@@ -22,6 +22,11 @@ object TryTest {
       case Some((n, v)) => println(s"os name: $n, os version: $v")
       case _ => println("nothing")
     }
+    configureOptFlatMap() match {
+      case Some((n, v)) => println(s"os name: $n, os version: $v")
+      case _ => println("nothing")
+    }
+
   }
 
   def configure(): Try[(String, String)] = {
@@ -37,7 +42,7 @@ object TryTest {
     for {
       oName <- Try(System.getProperty("os.name"))
       oVersion <- Try(System.getProperty("os.version"))
-//      exc <- Try(throw new Exception("don't wanna show name and version"))
+    //      exc <- Try(throw new Exception("don't wanna show name and version"))
     }
       yield (oName, oVersion)
   }
@@ -56,5 +61,9 @@ object TryTest {
       oName <- Option(System.getProperty("os.name"))
       oVersion <- Option(System.getProperty("os.version"))
     } yield (oName, oVersion)
+  }
+
+  def configureOptFlatMap(): Option[(String, String)] = {
+    Option(System.getProperty("os.name")).flatMap(n => Option(System.getProperty("os.version")).map(v=>(n,v)))
   }
 }
