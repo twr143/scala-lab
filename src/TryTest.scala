@@ -46,7 +46,7 @@ object TryTest {
     }
       yield (oName, oVersion)
   }
-
+   //3
   def configureOpt(): Option[(String, String)] = {
     val oName = Option(System.getProperty("os.name"))
     val oVersion = Option(System.getProperty("os.version"))
@@ -55,14 +55,14 @@ object TryTest {
       case _ => None
     }
   }
-
+  //4
   def configureOptFor(): Option[(String, String)] = {
     for {
       oName <- Option(System.getProperty("os.name"))
       oVersion <- Option(System.getProperty("os.version"))
     } yield (oName, oVersion)
   }
-
+  //5. 3 eq. 4 eq. 5
   def configureOptFlatMap(): Option[(String, String)] = {
     Option(System.getProperty("os.name")).flatMap(n => Option(System.getProperty("os.version")).map(v=>(n,v)))
   }
