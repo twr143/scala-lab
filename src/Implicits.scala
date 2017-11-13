@@ -1,18 +1,37 @@
+import Greeter._
+
 /*
 created by Ilya Volynin at 09.11.17
 */
 object Implicits {
-//  import Person._
+//  import Impl._
+  implicit val prompt = new PreferredPrompt("Yes, master> ")
+  implicit val drink = new PreferredDrink("tea")
   def main(args: Array[String]): Unit = {
-    val johnDoe = Person("John", "Doe", 32)
-    val jdName:String = johnDoe
-    println(s"name: $jdName")
+    greet("Ilya")
   }
 }
-case class Person(name: String, surname: String, age: Int)
-object Person {
-  implicit def pToString(p: Person):String = p.name + " " + p.surname + ", age " + p.age
-//  implicit def pToString2(p: Person):String = p.name + " " + p.surname + ", age " + p.age
-  implicit def pToInt(p: Person):Int = p.age
+
+class PreferredPrompt(val preference: String)
+class PreferredDrink(val preference: String)
+
+object Greeter {
+  def greet(name: String)(implicit prompt: PreferredPrompt,
+                          drink: PreferredDrink) = {
+
+    println("Welcome, " + name + ". The system is ready.")
+    print("But while you work, ")
+    println("why not enjoy a cup of " + drink.preference + "?")
+    println(prompt.preference)
+
+  }
 }
+object Impl{
+  implicit def prompt = new PreferredPrompt("Yes, master> ")
+  implicit def drink = new PreferredDrink("tea")
+}
+
+
+//object Impl extends Impl
+
 
