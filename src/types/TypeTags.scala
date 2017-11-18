@@ -30,7 +30,7 @@ object TypeTags {
      sealed trait Foo
      case class Bar() extends Foo
 
-  def processGenericMap[T: TypeTag](json: Map[String, T]) {
+  def processGenericMap[T](json: Map[String, T])(implicit tag: TypeTag[T]) {
       typeOf[T] match {
         case t if t =:= typeOf[String] =>
           println("Map of strings")
