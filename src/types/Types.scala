@@ -1,3 +1,5 @@
+package types
+
 import scala.reflect.ClassTag
 
 object Types {

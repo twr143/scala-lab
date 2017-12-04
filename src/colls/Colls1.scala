@@ -1,5 +1,4 @@
-import scala.collection.mutable.Set
-import scala.collection.JavaConverters._
+package colls
 object Colls1 {
   def main(args: Array[String]): Unit = {
  /*  val names:Set[String] = Set.empty[String]

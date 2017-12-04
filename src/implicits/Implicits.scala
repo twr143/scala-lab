@@ -1,4 +1,6 @@
-import Greeter._
+package implicits
+
+import implicits.Greeter._
 
 /*
 created by Ilya Volynin at 09.11.17
