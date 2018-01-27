@@ -1,7 +1,6 @@
 package implicits
 trait Document {
   def id: Int
-
   def contents: String
 }
 case class Draft(id: Int, contents: String) extends Document {
