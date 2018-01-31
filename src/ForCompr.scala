@@ -15,6 +15,8 @@ object ForCompr {
       c <- p.children
     } yield (p.name, c.name)
     println(motherKid2)
+    for ((k, v) <- scala.collection.JavaConverters.dictionaryAsScalaMap(System.getProperties).retain((k, v) => !v.toString.isEmpty))
+      println(s"$k -> $v")
   }
 }
 case class Person(name: String, isMale: Boolean, children: Person*)

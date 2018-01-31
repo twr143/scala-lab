@@ -1,4 +1,4 @@
-object CaseLab {
+object PatternMatchingLab {
   abstract class Notification
   case class Email(sender: String, title: String, body: String) extends Notification
   case class SMS(caller: String, message: String) extends Notification
@@ -8,7 +8,6 @@ object CaseLab {
   case class TelegramMessage(contactName: String, msg: String) extends Notification {
     override def toString: String = s"contact: $contactName msg: $msg"
   }
-
   def showNotification(n: Notification): String = {
     n match {
       case Email(sender, title, body) =>
@@ -39,9 +38,9 @@ object CaseLab {
     showNotificationU(someEmail)
     showNotificationU(someVoiceRecording)
     showNotificationU(telegramMessage)*/
-    var initialP = Property("1",Some("1"))
+    /*var initialP = Property("1",Some("1"))
     val value = None
     initialP= initialP.copy(name="2",value = value.orElse(initialP.value))
-    println(initialP)
+    println(initialP)*/
   }
 }
