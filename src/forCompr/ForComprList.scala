@@ -1,7 +1,9 @@
+package forCompr
+
 /*
-created by Ilya Volynin at 16.11.17
+created by Ilya Volynin at 31.01.18
 */
-object ForCompr {
+object ForComprList {
   def main(args: Array[String]): Unit = {
     val lara = Person("Lara", false)
     val bob = Person("Bob", true)
@@ -15,8 +17,6 @@ object ForCompr {
       c <- p.children
     } yield (p.name, c.name)
     println(motherKid2)
-//    for ((k, v) <- scala.collection.JavaConverters.dictionaryAsScalaMap(System.getProperties).retain((k, v) => !v.toString.isEmpty))
-//      println(s"$k -> $v")
   }
 }
 case class Person(name: String, isMale: Boolean, children: Person*)
