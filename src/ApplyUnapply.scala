@@ -3,7 +3,7 @@ object ApplyUnapply {
   def main(args: Array[String]): Unit = {
     createAndPrintCustomer("Ilya")
     createAndPrintCustomer("")
-
+     val b = B("345")
   }
   def createAndPrintCustomer(name:String):Unit ={
     val customer1ID = CustomerIDAux(name)
@@ -26,7 +26,10 @@ object CustomerIDAux{
   }
 }
 case class M(a: Seq[String] )
-
+case class B(some: String){
+  def field():Int = 1
+  val constant = 2
+}
 object MAux {
   def apply(a: String*): M = M(a) // makes a M from an As.
   def unapplySeq(m: M): Option[Seq[String]] = Some(m.a) // retrieve the As from the M

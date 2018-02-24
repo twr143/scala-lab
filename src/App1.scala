@@ -3,11 +3,12 @@ import scala.concurrent.{Await, Future}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.Success
 import scala.concurrent.duration._
+import java.util.regex.Pattern
 
 object App1 {
 
   def main(args: Array[String]): Unit = {
-    val sumF = Future {
+    /*val sumF = Future {
       (1L to 10L).sum
     }
 
@@ -20,12 +21,12 @@ object App1 {
       case Success(s) => println(s"5 times= $s")
       case any => println(s"not expected"+any.toString)
     }
+      */
 
-
-    Await.result(fivetimes, 5.seconds)
+//    Await.result(fivetimes, 5.seconds)
    // println(s"5 times= $result")
 
-    val sumF2 = Future {
+    /*val sumF2 = Future {
       (1L to 1000L).sum
     }.map{
       s=>
@@ -38,8 +39,9 @@ object App1 {
     }.recover{ case e:Exception =>
         println(s" exception:$e.")
 
-    }
-    Await.result(sumF2, 5.seconds)
-
+    } */
+    //Await.result(sumF2, 5.seconds)
+        val p = Pattern.compile("^user\\d{1,2}$")
+    println(p.matcher("user12e").matches())
   }
 }

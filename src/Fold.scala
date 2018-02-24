@@ -10,7 +10,7 @@ object Fold {
     )
   }
 
-  def goodOrBad(param: Option[Int]): Either[Bad1, Good1] = {
+  def goodOrBad(param: Option[Int]): Either[Result1, Result1] = {
     if (param.exists(_ > 0)) Right(Good1(param.get)) else Left(Bad1(param.getOrElse(0)))
   }
 }
