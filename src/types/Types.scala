@@ -1,8 +1,8 @@
 package types
 
-import scala.reflect.ClassTag
 
 object Types {
+  import scala.reflect.ClassTag
   class Pair[T: Ordering](val first: T, val second: T) {
     def smaller(implicit ord: Ordering[T]): T =
       if (ord.compare(first, second) < 0) first else second

@@ -23,7 +23,6 @@ object FutureApp {
     val attempts = Future.sequence(Seq(f1, f2, fExc, f4))
     val att2 = attempts.map(_.map {
       case i: Int => i + 1
-      case _ => -1
     }
     ).recover {
       case NonFatal(e) ⇒ 0
