@@ -1,5 +1,4 @@
 package forCompr
-
 /*
 created by Ilya Volynin at 31.01.18
 */
@@ -18,6 +17,7 @@ object ForComprList {
     val motherFatherKid2 = for {
       p <- persons //if false
       c <- p.children
+      if p.children.size > 2
     } yield (p.name, c.name)
     println(motherFatherKid2)
   }
