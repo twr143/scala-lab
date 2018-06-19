@@ -40,9 +40,9 @@ object TryTest {
 
   def configureFor(): Try[(String, String)] = {
     for {
+      exc <- Try(throw new Exception("don't wanna show name and version"))
       oName <- Try(System.getProperty("os.name"))
       oVersion <- Try(System.getProperty("os.version"))
-    //      exc <- Try(throw new Exception("don't wanna show name and version"))
     }
       yield (oName, oVersion)
   }
