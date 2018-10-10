@@ -53,6 +53,7 @@ object FutureApp {
       case NonFatal(e) ⇒ println(e)
     }
     Await.ready(r, 1.seconds)
+    println(1,2,3,4)
    // println(r)
   }
 }
