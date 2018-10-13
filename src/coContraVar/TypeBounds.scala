@@ -31,13 +31,14 @@ object TypeBounds extends App {
 
   case class RSwallow() extends EuropeanSwallow
 
-  val africanSwallowList = ListNode[AfricanSwallow](AfricanSwallow(), Nil())
+  val rSwallowList = ListNode[RSwallow](RSwallow(), Nil())
 
-  val birdList: Node[Bird] = africanSwallowList
+  val birdList: Node[RSwallow] = rSwallowList
 
   //тип в prepend надо указывать, иначе он Any
-  val birdList2: Node[Bird] = birdList.prepend[EuropeanSwallow](RSwallow())
+  val birdList2 = birdList.prepend[EuropeanSwallow](new EuropeanSwallow())
 
-  //  val birdList3 = birdList2.prepend("1")
-  println(birdList2)
+  //      val birdList3 = birdList2.prepend[RSwallow](RSwallow()) // error
+  val birdList3 = birdList2.prepend[Bird](AfricanSwallow()) //ok
+  println(birdList3)
 }
