@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/codeStyles/
+.idea/hydra.xml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/scala-lab.iml
+.idea/vcs.xml
+.idea/workspace.xml
+lib/
+out/
