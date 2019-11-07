@@ -36,7 +36,7 @@ object ListReverse {
     def reverseList(): ListNode = {
       var h = this
       var hnext = h.next
-      this.next = None
+      next = None
       while (hnext.isDefined) {
         val loch = h
         h = hnext.get
@@ -45,6 +45,38 @@ object ListReverse {
       }
       h
     }
+
+    def reverseBetween(start: Int, end: Int): ListNode = {
+      var head = this
+      var prevHead = this
+      var s = start
+      while (s > 1 && head.next.isDefined) {
+        prevHead = head
+        head = head.next.get
+        s -= 1
+      }
+      var h = head
+      var hnext = h.next
+      head.next = None
+      var e = end - start + 1
+      while (hnext.isDefined && e > 1) {
+        val loch = h
+        h = hnext.get
+        hnext = h.next
+        h.next = Some(loch)
+        e -= 1
+      }
+      if (start > 1) {
+        head.next = hnext
+        prevHead.next = Some(h)
+        this
+      } else {
+        prevHead.next = hnext
+//        next = h.next
+//        x = h.x
+        h
+      }
+    }
   }
 
   def main(args: Array[String]): Unit = {
@@ -52,7 +84,16 @@ object ListReverse {
     l.add(new ListNode(1))
     l.add(new ListNode(2))
     l.add(new ListNode(3))
+    l.add(new ListNode(4))
     println(l.print())
-    println(l.reverseList().print())
+    //    println(l.reverseBetween(2, 3).print())
+    //    println(l.reverseBetween(2, 4).print())
+    println(l.reverseBetween(1, 3).print())
+    println(l.reverseBetween(1, 3).print())
+    println(l.reverseBetween(1, 3).print())
+    //        println(l.reverseBetween(2, 5).print())
+    //    println(l.reverseBetween(3, 5).reverseBetween(3, 5).print())
+    //    val o = Some(1)
+    //    println(o.fold(0)(_ => 1))
   }
 }
