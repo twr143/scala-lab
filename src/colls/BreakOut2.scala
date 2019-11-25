@@ -1,5 +1,5 @@
 package colls
-import scala.collection.breakOut
+import scala.collection.{breakOut, mutable}
 import scala.collection.immutable.TreeMap
 
 /**
@@ -24,5 +24,12 @@ object BreakOut2 {
       case m: TreeMap[_, _] => println("general acceptable type")
       case _ => println("unacc type")
     }
+    implicit val orderingForTreeSet = new Ordering[Int] {
+      def compare(o1: Int, o2: Int): Int = o2 - o1
+    }
+    val set = mutable.Set(1, 2, 3)
+    println(set)
+    println(set.max(orderingForTreeSet))
+
   }
 }

@@ -1,5 +1,6 @@
 package colls
 import coContraVar.TypeBounds.ListNode
+import scala.collection.mutable.ArrayBuffer
 
 /**
   * Created by Ilya Volynin on 16.10.2019 at 16:46.
@@ -72,10 +73,26 @@ object ListReverse {
         this
       } else {
         prevHead.next = hnext
-//        next = h.next
-//        x = h.x
+        //        next = h.next
+        //        x = h.x
         h
       }
+    }
+
+    def isPalindrome(): Boolean = {
+      var h = this
+      val buf = ArrayBuffer[Int]()
+      buf += h.x
+      while (h.next.isDefined) {
+        h = h.next.get
+        buf += h.x
+      }
+      val halfLength = buf.length / 2
+      for (i <- halfLength - 1 to 0 by -1)
+        if (buf(i) != (buf(buf.length - 1 - i))) {
+          return false
+        }
+      true
     }
   }
 
@@ -88,12 +105,19 @@ object ListReverse {
     println(l.print())
     //    println(l.reverseBetween(2, 3).print())
     //    println(l.reverseBetween(2, 4).print())
-    println(l.reverseBetween(1, 3).print())
-    println(l.reverseBetween(1, 3).print())
-    println(l.reverseBetween(1, 3).print())
+    //    println(l.reverseBetween(1, 3).print())
+    //    println(l.reverseBetween(1, 3).print())
+    //    println(l.reverseBetween(1, 3).print())
     //        println(l.reverseBetween(2, 5).print())
     //    println(l.reverseBetween(3, 5).reverseBetween(3, 5).print())
     //    val o = Some(1)
     //    println(o.fold(0)(_ => 1))
+    val l2 = new ListNode(1)
+    l2.add(new ListNode(2))
+    l2.add(new ListNode(3))
+    l2.add(new ListNode(2))
+    l2.add(new ListNode(2))
+    l2.add(new ListNode(1))
+    println(l2.isPalindrome())
   }
 }
