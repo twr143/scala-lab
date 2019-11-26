@@ -83,7 +83,6 @@ public class SkylineJ {
     }
 
     public static void main(String[] args) {
-        System.out.println(getSkyline(Array(Array(0, 2, 3))));
 
     }
 }
