@@ -4,6 +4,7 @@ object TypeClass1 {
   import Show._
   def main(args: Array[String]): Unit = {
           println( show(123))
+          println( show("strstr"))
           println( show2(465))
   }
  
