@@ -1,9 +1,9 @@
-import scala.xml.{Elem, NodeSeq}
+//import scala.xml.{Elem, NodeSeq}
 
 /**
   * Created by ilya on 12.11.2017.
   */
-object XmlTest {
+/*object XmlTest {
   class ChildSelectable(ns: NodeSeq) {
     def \* : NodeSeq = ns flatMap {
       _ match {
@@ -32,3 +32,4 @@ object XmlTest {
     }
   }
 }
+  */
