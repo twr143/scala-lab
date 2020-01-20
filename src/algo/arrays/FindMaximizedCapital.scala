@@ -17,32 +17,32 @@ object FindMaximizedCapital {
     }
     i = 0
     while (i < k) {
-      var heapMaxProfitIndex = -1
-      var heapMaxProfit = 0
-      var heapProfits = mutable.TreeMap.empty[Int, Int]
+      var candidatesMaxProfitIndex = -1
+      var candidatesMaxProfit = 0
+      var candidates = mutable.TreeMap.empty[Int, Int]
       var loserIndexes = Set.empty[Int]
       var candidatesLength = k
       projects.foreach {
-        case (key, v) => if (v._1 > heapMaxProfit && v._2 <= currentCapital) {
-          heapMaxProfitIndex = key
-          heapMaxProfit = v._1
+        case (key, v) => if (v._1 > candidatesMaxProfit && v._2 <= currentCapital) {
+          candidatesMaxProfitIndex = key
+          candidatesMaxProfit = v._1
         }
           if (v._2 <= currentCapital)
-            if (heapProfits.size < candidatesLength)
-              if (heapProfits.contains(v._1)) {
+            if (candidates.size < candidatesLength)
+              if (candidates.contains(v._1)) {
                 if (candidatesLength > 1) candidatesLength -= 1
               }
-              else heapProfits += ((v._1, key))
-            else if (heapProfits.firstKey < v._1) {
-              loserIndexes += heapProfits(heapProfits.firstKey)
-              heapProfits -= heapProfits.firstKey
-              heapProfits += (v._1 -> key)
+              else candidates += ((v._1, key))
+            else if (candidates.firstKey < v._1) {
+              loserIndexes += candidates(candidates.firstKey)
+              candidates -= candidates.firstKey
+              candidates += (v._1 -> key)
             }
-            else if (heapProfits.firstKey > v._1) loserIndexes += key
+            else if (candidates.firstKey > v._1) loserIndexes += key
       }
-      projects.remove(heapMaxProfitIndex)
+      projects.remove(candidatesMaxProfitIndex)
       loserIndexes.foreach(projects.remove)
-      currentCapital += heapMaxProfit
+      currentCapital += candidatesMaxProfit
       i += 1
     }
     currentCapital
