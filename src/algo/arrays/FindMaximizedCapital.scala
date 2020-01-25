@@ -19,26 +19,23 @@ object FindMaximizedCapital {
     while (i < k) {
       var candidatesMaxProfitIndex = -1
       var candidatesMaxProfit = 0
-      var candidates = mutable.TreeMap.empty[Int, Int]
+      implicit val orderForCandidates = Ordering.fromLessThan[(Int,Int)](_._1 > _._1)
+      var candidates = mutable.PriorityQueue[(Int, Int)]()//(capital,index)
       var loserIndexes = Set.empty[Int]
-      var candidatesLength = k
       projects.foreach {
         case (key, v) => if (v._1 > candidatesMaxProfit && v._2 <= currentCapital) {
           candidatesMaxProfitIndex = key
           candidatesMaxProfit = v._1
         }
           if (v._2 <= currentCapital)
-            if (candidates.size < candidatesLength)
-              if (candidates.contains(v._1)) {
-                if (candidatesLength > 1) candidatesLength -= 1
-              }
-              else candidates += ((v._1, key))
-            else if (candidates.firstKey < v._1) {
-              loserIndexes += candidates(candidates.firstKey)
-              candidates -= candidates.firstKey
+            if (candidates.size < k)
+               candidates += ((v._1, key))
+            else if (candidates.head._1 < v._1) {
+              loserIndexes += candidates.head._2
+              candidates.dequeue()
               candidates += (v._1 -> key)
             }
-            else if (candidates.firstKey > v._1) loserIndexes += key
+            else if (candidates.head._1 > v._1) loserIndexes += key
       }
       projects.remove(candidatesMaxProfitIndex)
       loserIndexes.foreach(projects.remove)
@@ -49,8 +46,8 @@ object FindMaximizedCapital {
   }
 
   def main(args: Array[String]): Unit = {
-    val profits = Array(1, 2, 3, 2, 7, 4)
-    val capital = Array(0, 1, 1, 3, 5, 2)
-    println(findMaximizedCapital(2, 0, profits, capital))
+    val profits = Array(1, 2, 3)
+    val capital = Array(0, 1, 1)
+    println(findMaximizedCapital(10, 0, profits, capital))
   }
 }

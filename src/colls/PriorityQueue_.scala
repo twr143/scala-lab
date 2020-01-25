@@ -7,7 +7,7 @@ import scala.collection.mutable.PriorityQueue
   */
 object PriorityQueue_ {
   def main(args: Array[String]): Unit = {
-    implicit val ord = Ordering.fromLessThan[Int](_ < _)
+    implicit val ord = Ordering.fromLessThan[Int](_ > _)
     //new Ordering[Int] {
     //      def compare(o1: Int, o2: Int): Int = {
     //        if (o1 - o2 != 0) o1 - o2 else 1

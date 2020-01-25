@@ -19,4 +19,9 @@ object Colls5 extends App {
   list = insert(list, 1, List(3, 4))
 
   println(list)
+
+  val l1 = List(1)
+  val l2 = 2::l1
+  val l3 = l2:+3
+  println(l3)
 }
