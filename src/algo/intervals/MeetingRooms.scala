@@ -23,8 +23,43 @@ object MeetingRooms {
     }.max
   }
 
+  def minMeetingRooms2(intervals: Array[Array[Int]]): Int = {
+    var endmeetings = 0;
+    var startMeetings = 0;
+
+    var starts = new Array[Int](intervals.length)
+    var ends = new Array[Int](intervals.length)
+
+    for (i <- 0 until intervals.length) {
+      starts(i) = intervals(i)(0)
+      ends(i) = intervals(i)(1)
+    }
+
+    scala.util.Sorting.quickSort(starts)
+    scala.util.Sorting.quickSort(ends)
+    var endidx = 0
+    println(starts.foldLeft("")(_ + _ + " "))
+    println(ends.foldLeft("")(_ + _ + " "))
+    for (i <- 0 until intervals.length) {
+
+      var start = starts(i)
+      var end = ends(endidx)
+
+
+      if (end > start) {
+        startMeetings += 1
+      } else {
+        endidx += 1
+      }
+
+    }
+
+    startMeetings
+  }
+
   def main(args: Array[String]): Unit = {
-    println(minMeetingRooms(Array(Array(9, 10), Array(4, 9), Array(4, 17))))
-    println(minMeetingRooms(Array(Array(7, 10), Array(2, 8))))
+    //    println(minMeetingRooms(Array(Array(0, 1), Array(0, 1), Array(2, 3), Array(2, 3), Array(2, 3))))
+    println(minMeetingRooms2(Array(Array(0, 1), Array(0, 1), Array(2, 3), Array(2, 3), Array(2, 3))))
+    //    println(minMeetingRooms(Array(Array(7, 10), Array(2, 8))))
   }
 }
