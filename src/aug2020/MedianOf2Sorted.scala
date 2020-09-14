@@ -71,7 +71,10 @@ object MedianOf2Sorted {
       val figt = firstIndGreaterThan(g, s(sm))
       val igShift = gm + (s.length - lilt - 1)
       val isShift = sm + (if (figt > -1) figt else 0)
-      mergeDescend(g, s, gm, lilt, igShift)
+      if (igShift > isShift)
+        mergeDescend(g, s, gm, lilt, igShift)
+      else
+        mergeAccend(g, s, sm, figt, isShift)
     }
   }
 
@@ -97,15 +100,40 @@ object MedianOf2Sorted {
     if ((s.length + g.length) % 2 == 0) (result1.toDouble + result2.toDouble) / 2 else result2.toDouble
   }
 
+  def mergeAccend(g: Array[Int], s: Array[Int], sm: Int, figt: Int, isShift: Int): Double = {
+    var processed = 0
+    val medium = (s.length + g.length) / 2
+    var sInd = sm
+    var gInd = figt
+    var result1, result2 = 0
+    while (processed + isShift <= medium) {
+      if (sInd >= s.length || g(gInd) < s(sInd)) {
+        result2 = result1
+        result1 = g(gInd)
+        gInd += 1
+      } else {
+        result2 = result1
+        result1 = s(sInd)
+        sInd += 1
+      }
+      println(s"r1 = $result1, r2 = $result2")
+      processed += 1
+    }
+    if ((s.length + g.length) % 2 == 0) (result1.toDouble + result2.toDouble) / 2 else result1.toDouble
+  }
+
   def main(args: Array[String]): Unit = {
 
     //    println(firstIndGreaterThan(Array(1, 2, 6, 7, 8), 5))
     //    println(lastIndLessThan(Array(6, 7, 8), 5))
-//    val nums1 = Array(1, 4, 8, 10, 13, 14, 15)
-//    val nums2 = Array(2, 3, 5, 6, 7, 9, 11, 12)
-//    println(findMedianSortedArrays(nums1, nums2))
-    val nums3 = Array(1, 3)
-    val nums4 = Array(2, 4, 5, 6, 7)
-    println(findMedianSortedArrays(nums3, nums4))
+    //    val nums1 = Array(1, 4, 8, 10, 13, 14, 15, 16)
+    //    val nums2 = Array(2, 3, 5, 6, 7, 9, 11, 12)
+//        println(findMedianSortedArrays(nums1, nums2))
+            val nums3 = Array(3)
+            val nums4 = Array(2, 5, 6, 7,8)
+            println(findMedianSortedArrays(nums3, nums4))
+//    val nums3 = Array(1, 3)
+//    val nums4 = Array(2, 4, 5, 6, 7, 8)
+//    println(findMedianSortedArrays(nums3, nums4))
   }
 }
