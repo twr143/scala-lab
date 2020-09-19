@@ -21,13 +21,15 @@ object MaxEnvelops {
     if (i < envelopes.length) {
       if (memoME.contains((lastIncl + 1, nIncl, i))) memoME(lastIncl + 1, nIncl, i)
       else {
-        val result = if (!matchE(envelopes, lastIncl, i, memo)) mE(envelopes, lastIncl, nIncl, i + 1, memo, memoME)
-        else {
-          Math.max(mE(envelopes, i, nIncl + 1, i + 1, memo, memoME),
-            mE(envelopes, lastIncl, nIncl, i + 1, memo, memoME))
-        }
-        memoME += (lastIncl + 1, nIncl, i) -> result
-        result
+        var j = 0
+        while (i + j < envelopes.length && !matchE(envelopes, lastIncl, i + j, memo)) j += 1
+        if (i + j < envelopes.length) {
+          val result =
+            Math.max(mE(envelopes, i + j, nIncl + 1, i + j + 1, memo, memoME),
+              mE(envelopes, lastIncl, nIncl, i + j + 1, memo, memoME))
+          memoME += (lastIncl + 1, nIncl, i) -> result
+          result
+        } else nIncl
       }
     }
     else nIncl
