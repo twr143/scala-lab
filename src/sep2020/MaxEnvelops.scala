@@ -37,14 +37,20 @@ object MaxEnvelops {
 
   def matchE(envelopes: Array[Array[Int]], last: Int, i: Int, memo: Array[Array[Option[Boolean]]]): Boolean =
     if (last > -1) {
-      if (memo(last)(i).isEmpty)
-        memo(last)(i) = Some(envelopes(last)(0) < envelopes(i)(0) && envelopes(last)(1) < envelopes(i)(1))
-      memo(last)(i).get
+      envelopes(last)(0) < envelopes(i)(0) && envelopes(last)(1) < envelopes(i)(1)
     } else
       true
 
 
   def main(args: Array[String]): Unit = {
-    println(maxEnvelopes(Array(Array(5, 4), Array(6, 4), Array(6, 7), Array(2, 3))))
-  }
+    println(maxEnvelopes(Array(Array(1, 10), Array(2, 100),
+      Array(3, 3), Array(4, 4), Array(5, 5))))
+  /*      println(maxEnvelopes(
+          Array(Array(15, 8),
+            Array(2, 20),
+            Array(2, 14), Array(4, 17), Array(8, 19), Array(8, 9), Array(5, 7), Array(11, 19), Array(8, 11),
+            Array(13, 11), Array(2, 13), Array(11, 19), Array(8, 11), Array(13, 11),
+            Array(2, 13), Array(11, 19), Array(16, 1),
+            Array(18, 13), Array(14, 17), Array(18, 19))))
+  */}
 }
