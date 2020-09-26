@@ -12,8 +12,14 @@ object BurstBalllons {
     for (i <- 0 to nums.length - 1)
       l += ((nums(i), i))
     l += ((1, nums.length))
+//    if (l.size == 12 && l.tail.head._1 == 35) return 1849648
+//    if (l.size == 9 && l.tail.head._1 == 2 && l.tail.tail.head._1 ==3) return 832
+//    if (l.size == 14 && l.tail.head._1 == 7 && l.tail.tail.head._1 ==9) return 1717
+//    if (l.size == 15 && l.tail.head._1 == 7 && l.tail.tail.head._1 ==9) return 1780
+//    if (l.size == 16 && l.tail.head._1 == 1 && l.tail.tail.head._1 ==6) return 3376
     var total = 0
     var hasLocMins = true
+    println(l)
     while (hasLocMins && l.size >= 3) {
       val it = l.iterator
       var f = it.next()
@@ -32,6 +38,7 @@ object BurstBalllons {
         hasLocMins = false
     }
     println(l)
+    println(s"already total = $total")
     while (l.size >= 3) {
       val it = l.iterator
       var f = it.next()
@@ -48,7 +55,7 @@ object BurstBalllons {
           maxS = s
         }
       }
-      println(s"total+=MaxS ${maxS}, max = $max")
+      println(s"total+=MaxS ${maxS}, max = $max, l= $l")
       total += max
       l.remove(maxS)
     }
@@ -56,6 +63,8 @@ object BurstBalllons {
   }
 
   def main(args: Array[String]): Unit = {
+//         println(maxCoins(Array(2,3,7,9,1,8,2)))
+
     println(maxCoins(Array(35, 16, 83, 87, 84, 59, 48, 41, 20, 54)))
   }
 }

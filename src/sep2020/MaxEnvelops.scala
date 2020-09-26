@@ -10,32 +10,20 @@ object MaxEnvelops {
   def maxEnvelopes(envelopes: Array[Array[Int]]): Int = {
     if (envelopes.size < 2) return envelopes.size
     scala.util.Sorting.quickSort(envelopes)(Ordering.fromLessThan((f, s) => if (f(0) != s(0)) f(0) < s(0) else f(1) < s(1)))
-    val memo = Array.fill[Option[Boolean]](envelopes.length, envelopes.length)(None)
-    val memoME = mutable.Map.empty[(Int, Int, Int), Int]
-    mE(envelopes, -1, 0, 0, memo, memoME)
+    val maxes = Array.fill(envelopes.length)(1)
+    maxes(0) = 1
+    var max = 1
+    for (i <- 1 to envelopes.length - 1)
+      for (j <- 0 to i - 1)
+        if(matchE(envelopes,j,i))
+          maxes(i) = Math.max(maxes(i), maxes(j) + 1)
+    for (i <- 1 to envelopes.length - 1)
+      if (max < maxes(i)) max = maxes(i)
+    max
   }
 
-  def mE(envelopes: Array[Array[Int]], lastIncl: Int, nIncl: Int, i: Int,
-         memo: Array[Array[Option[Boolean]]], memoME: mutable.Map[(Int, Int, Int), Int]): Int = {
-    //        println(s"max=${mapMax("max")}")
-    if (i < envelopes.length) {
-      if (memoME.contains((lastIncl + 1, nIncl, i))) memoME(lastIncl + 1, nIncl, i)
-      else {
-        var j = 0
-        while (i + j < envelopes.length && !matchE(envelopes, lastIncl, i + j, memo)) j += 1
-        if (i + j < envelopes.length) {
-          val result =
-            Math.max(mE(envelopes, i + j, nIncl + 1, i + j + 1, memo, memoME),
-              mE(envelopes, lastIncl, nIncl, i + j + 1, memo, memoME))
-          memoME += (lastIncl + 1, nIncl, i) -> result
-          result
-        } else nIncl
-      }
-    }
-    else nIncl
-  }
 
-  def matchE(envelopes: Array[Array[Int]], last: Int, i: Int, memo: Array[Array[Option[Boolean]]]): Boolean =
+  def matchE(envelopes: Array[Array[Int]], last: Int, i: Int): Boolean =
     if (last > -1) {
       envelopes(last)(0) < envelopes(i)(0) && envelopes(last)(1) < envelopes(i)(1)
     } else
