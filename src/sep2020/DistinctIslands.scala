@@ -27,19 +27,38 @@ object DistinctIslands {
   }
 
   def numIslands2(m: Int, n: Int, positions: Array[Array[Int]]): List[Int] = {
-    val lands = mutable.Set.empty[(Int, Int)]
+    val lands = mutable.Map.empty[Int, mutable.Set[(Int, Int)]]
+    var landInd = 0
     var curIsl = 0
     val islCnt = mutable.ListBuffer.empty[Int]
     for (k <- 0 to positions.length - 1) {
       val (i, j) = (positions(k)(0), positions(k)(1))
-      if (!lands.contains((i, j))) {
-        val hasNeighbors = (i > 0 && lands.contains((i - 1, j))) || (j > 0 && lands.contains((i, j - 1))) ||
-          (i < m - 1 && lands.contains((i + 1, j))) || (j < n - 1 && lands.contains((i, j + 1)))
-        lands += ((i, j))
-        if (!hasNeighbors) curIsl += 1
-        else curIsl = numDistinctIslands(m, n, lands.clone)
+      val neighBoors = mutable.TreeSet.empty[Int]
+      var duplicate = false
+      for (k <- lands.keySet) {
+        if (!lands(k).contains((i, j))) {
+          if (i > 0 && lands(k).contains((i - 1, j)) ||
+            (j > 0 && lands(k).contains((i, j - 1))) ||
+            (i < m - 1 && lands(k).contains((i + 1, j)))
+            || (j < n - 1 && lands(k).contains((i, j + 1))))
+            neighBoors += k
+        }
+        else
+          duplicate = true
       }
-      islCnt += curIsl
+
+      if (!duplicate && neighBoors.isEmpty) {
+        lands += landInd -> mutable.Set((i, j))
+        landInd += 1
+      } else if (!duplicate) {
+        val mergeInd = neighBoors.head
+        for (i <- neighBoors.tail) {
+          for (l <- lands(i)) lands(mergeInd) += l
+          lands -= i
+        }
+        lands(mergeInd) += ((i, j))
+      }
+      islCnt += lands.size
     }
     islCnt.toList
   }
