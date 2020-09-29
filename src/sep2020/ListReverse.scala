@@ -20,7 +20,7 @@ object ListReverse {
       }
       this
     }
-
+             
     def print(): String = next match {
       case Some(nn) => s"${this.x} -> " + print(nn)
       case None => s"$x"
