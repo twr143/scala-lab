@@ -6,7 +6,10 @@ import scala.concurrent.duration._
 import java.util.regex.Pattern
 
 object App1 {
-
+  def f(arr:List[Int]):List[Int] = {
+     arr.zipWithIndex.filter(_._2%2==0).map(_._1)
+  }
+  
   def main(args: Array[String]): Unit = {
     /*val sumF = Future {
       (1L to 10L).sum
