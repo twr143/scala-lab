@@ -13,7 +13,7 @@ object GroupBy {
     val gr = cars.groupBy(c => c.serial.substring(6))
     println(gr)
     println(gr.map { case (reg, seq) => {
-  
+                 
       val a = seq.map(_.year).toArray
       if (a.size%2==0)
         (reg,(a(a.size/2-1)+a(a.size/2))/2)
