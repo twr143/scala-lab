@@ -1,6 +1,6 @@
 package algo.intervals
 
-import scala.collection.{breakOut, mutable}
+import scala.collection.{ mutable}
 
 /**
   * Created by Ilya Volynin on 16.02.2020 at 13:05.

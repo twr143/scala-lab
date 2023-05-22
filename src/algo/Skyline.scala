@@ -1,5 +1,4 @@
 package algo
-import scala.collection.breakOut
 import scala.collection.immutable.TreeSet
 import scala.collection.mutable.ArrayBuffer
 
@@ -23,7 +22,7 @@ object Skyline {
         if (o1.h != o2.h) o2.h - o1.h else if (o1.r != o2.r) o2.r - o1.r else
           o2.l - o1.l
     }
-    var topTreeSet = buildings.map(b => Rect(b(0), b(1), b(2)))(breakOut[Array[Array[Int]], Rect, TreeSet[Rect]])
+    var topTreeSet = buildings.map(b => Rect(b(0), b(1), b(2)))
     var bottomTreeSet = TreeSet.empty[Rect](orderingForBottomTreeSet)
     var l, r = Int.MinValue
     var h = 0
